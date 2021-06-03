@@ -1,0 +1,11 @@
+fonction manip arguments : 
+
+va_start --> initialise le parcours des paramètres optionnels.
+Elle attend deux arguments : une variable de type va_list et le nom du dernier paramètre obligatoire de la fonction courante.
+Il est impératif de l’appeler avant toute opération sur les paramètres optionnels.
+
+va_arg() --> retourne le paramètre optionnel suivant en considérant celui-ci comme de type type.
+Elle attend deux arguments : une variable de type va_list précédemment initialisée par la macrofonction va_start() et le type du paramètre optionnel suivant.
+
+va_end() --> met fin au parcours des arguments optionnels.
+Elle doit toujours être appelée après un appel à la macrofonction va_start().
