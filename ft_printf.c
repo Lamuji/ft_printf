@@ -6,33 +6,29 @@
 /*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:22:44 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/03 18:26:18 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/06/03 19:29:44 by ramzi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
 int		ft_printf(const char *format, ...)
 {
 	va_list		args;
 	int			i;
 
+	i = 0;
 	va_start(args, format);
 
-	while (format)
-	
+	while (format[i])
 	{
+		if (!format)
+			return (-1);
 		if (format[i] == '%')
-		{
-			i++;
-			ft_conv(args, format, i);
-		}
+			ft_conv(args, format, i + 1);
 		else
-		{	
 			ft_putchar_fd(i, 1);
-			i++;
-		}
+		i++;
 	}
 return 0;
 }
