@@ -3,6 +3,8 @@
 
 int main()
 {
-    ft_printf("%c", 'h');
-    printf("%c", 'h');
+	char  c;
+	printf("ta grand mere %% hey\n", ' ');
+    ft_printf("ta grand mere %% hey", ' ');
+    
 }
