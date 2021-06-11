@@ -6,7 +6,7 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 18:20:17 by ramzi             #+#    #+#             */
-/*   Updated: 2021/06/06 19:00:10 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/11 16:50:50 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int		ft_conv(va_list args, char const *format, int i)
 	char *str;
 
 	if (format[i] == 'd' || format[i] == 'i')
-	{
-		nbr = va_arg(args, int);
-		ft_putnbr_fd(nbr, 1);
-	}
+		return case_d(nbr, args);
     else if (format[i] == 'c')
     {
         c = va_arg(args, int);
@@ -34,16 +31,8 @@ int		ft_conv(va_list args, char const *format, int i)
 		str = va_arg(args, char *);
 		ft_putstr(str);
 	}
-	else if (format[i] == 'x')
-	{
-		nbr = va_arg(args, unsigned long);
-		ft_putnbr_base(nbr,"0123456789abcdef");
-	}
-	else if (format[i] == 'X')
-	{
-		nbr = va_arg(args, unsigned long);
-		ft_putnbr_base(nbr,"0123456789ABCDEF");
-	}
+	else if (format[i] == 'x' || format[i] == 'X')
+		return case_xX(nbr, i, args);
 	else if (format[i] == 'u')
 	{
 		nbr = va_arg(args, unsigned long);
@@ -54,11 +43,9 @@ int		ft_conv(va_list args, char const *format, int i)
 		c = va_arg(args, int);
 		ft_putchar(format[i]);
 	}
-	else if (format[i] == 'p')
+	/*else if (format[i] == 'p')
 	{
 		str = va_arg(args, unsigned int);
-		
-		
-	}
+	}*/ 
 		return 0;
 }

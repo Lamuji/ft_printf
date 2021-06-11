@@ -5,7 +5,16 @@ Elle attend deux arguments : une variable de type va_list et le nom du dernier
 Il est impératif de l’appeler avant toute opération sur les paramètres optionnels.
 
 va_arg() --> retourne le paramètre optionnel suivant en considérant celui-ci comme de type type.
-Elle attend deux arguments : une variable de type va_list précédemment initialisée par la macrofonction va_start() et le type du paramètre optionnel suivant.
-
+Elle attend deux arguments : une variable de type va_list précédemment initialisée par la macrofonction va_start() et l
+e type du paramètre optionnel suivant.
 va_end() --> met fin au parcours des arguments optionnels.
 Elle doit toujours être appelée après un appel à la macrofonction va_start().
+
+
+
+Les flag, qui modifient la specification :
+
+- '-' : Left align the result within the given field width.
+- '+' : Use a sign (+ or -) to prefix the output value if it's of a signed type. (instead of negative value only)
+- '0' : If width is prefixed by 0, leading zeros are added until the minimum width is reached. If both 0 and - appear, the 0 is ignored.
+- '
