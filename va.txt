@@ -11,10 +11,8 @@ va_end() --> met fin au parcours des arguments optionnels.
 Elle doit toujours être appelée après un appel à la macrofonction va_start().
 
 
-
-Les flag, qui modifient la specification :
-
 - '-' : Left align the result within the given field width.
 - '+' : Use a sign (+ or -) to prefix the output value if it's of a signed type. (instead of negative value only)
 - '0' : If width is prefixed by 0, leading zeros are added until the minimum width is reached. If both 0 and - appear, the 0 is ignored.
-- '
+- '.' :
+

@@ -6,7 +6,7 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 15:58:08 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/11 18:19:05 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/15 17:08:12 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "libft.h"
+#include "libft/libft.h"
+
+# define TYPE "csdiupxX"
 
 typedef	struct 	s_flag
 {
@@ -39,5 +41,6 @@ int     ft_putnbr_base(unsigned long nbr, char *base);
 void	ft_putunbr_fd(long int n, int fd);
 int		case_d(int nbr, va_list args);
 int 	case_xX(int nbr, int i, va_list args);
+int		ft_isdigit(int c);
 
 # endif
