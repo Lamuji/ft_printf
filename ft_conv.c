@@ -6,12 +6,12 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 18:20:17 by ramzi             #+#    #+#             */
-/*   Updated: 2021/06/15 18:22:31 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/16 18:33:40 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 int		ft_conv(va_list args, t_flag flag)
 {
@@ -22,5 +22,11 @@ int		ft_conv(va_list args, t_flag flag)
 	type = flag.type;
 	if (type == '%')
 		ft_putchar(type);
-	if (format[i] == 'c')
-		print_char(va_arg(args, int), flag);
+	else if (type == 'c')
+		print_char(args, flag);
+	else if (type == 'd' || type == 'i')
+		print_d_i(args, flag);
+	
+	return type;
+}
+	

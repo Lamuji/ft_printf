@@ -16,3 +16,5 @@ Elle doit toujours être appelée après un appel à la macrofonction va_start()
 - '0' : If width is prefixed by 0, leading zeros are added until the minimum width is reached. If both 0 and - appear, the 0 is ignored.
 - '.' :
 
+
+//0000000050 : affiche nb de 0 moins taille du d

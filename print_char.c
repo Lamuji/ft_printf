@@ -6,18 +6,23 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 17:25:59 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/15 18:29:13 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/16 16:09:38 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_print.h"
+#include "ft_printf.h"
 
-int		print_char(va_arg(va_list args, type), t_flag flags)
+int		print_char(va_list args, t_flag flags)
 {
-	int b;
-	int i;
-
-	b = 0;
-	i = 1;
-	if (flag.zero != )
+	char	c;
+	
+	c =	va_arg(args, int);
+	/*if (flag.zero == 1)
+		{
+			
+			printf("fahsfla fsa %c", 'k');
+		}*/
+	
+	ft_putchar(c);
+	return 0;
 }

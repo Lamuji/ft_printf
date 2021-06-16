@@ -6,12 +6,12 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:06:54 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/09 13:06:55 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/16 19:11:51 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 void	ft_putchar(char c)
 {
@@ -97,4 +97,55 @@ int     ft_putnbr_base(unsigned long nbr, char *base)
 	else if (nbr <= len_base)
 	ft_putchar(base[nbr]);
 	return(nbr);
+}
+
+int	ft_isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 49 && c <= 57)
+		return (1);
+	return (0);
+}
+
+static int	ft_isspace(char str)
+{
+	if (str == '\t' || str == '\n' || str == '\r'
+		|| str == '\v' || str == '\f' || str == ' ')
+		return (1);
+	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	size_t	i;
+	size_t	nbr;
+	size_t	n;
+
+	n = 0;
+	i = 0;
+	nbr = 0;
+	while (ft_isspace(str[i]) == 1)
+		i++;
+	while (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i + 1] == '-' || str[i + 1] == '+')
+			return (0);
+		else if (str[i] == '-')
+			n++;
+		i++;
+	}
+	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
+	{
+		nbr = (nbr * 10) + str[i] - '0';
+		i++;
+	}
+	if (n % 2 == 0)
+		return (nbr * 1);
+	return (nbr * -1);
 }
