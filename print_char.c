@@ -6,13 +6,13 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 17:25:59 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/16 16:09:38 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/17 19:28:11 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_char(va_list args, t_flag flags)
+int		print_char(va_list args, t_flag *flags)
 {
 	char	c;
 	

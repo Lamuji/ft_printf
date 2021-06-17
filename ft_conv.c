@@ -6,27 +6,27 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 18:20:17 by ramzi             #+#    #+#             */
-/*   Updated: 2021/06/16 18:33:40 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/17 21:22:37 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int		ft_conv(va_list args, t_flag flag)
+void		ft_conv(va_list args, t_flag *flag, const char * format, int i)
 {
     int nbr;
     char c;
-	char type;
+	
+	if(flag->width == 1)
+	{
+		ft_width(format, i, args, flag);
+		if (format[i] == '%')
+			ft_putchar(format[i]);
+		else if (format[i] == 'c')
+			print_char(args, flag);
+		else if (format[i] == 'd' || format[i] == 'i')
+			print_d_i(args, flag, format, i);
+	}
 
-	type = flag.type;
-	if (type == '%')
-		ft_putchar(type);
-	else if (type == 'c')
-		print_char(args, flag);
-	else if (type == 'd' || type == 'i')
-		print_d_i(args, flag);
-	
-	return type;
 }
-	

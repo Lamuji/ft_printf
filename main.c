@@ -3,6 +3,7 @@
 
 int main()
 {
-	printf("%3d", 42); 
+	printf("%10d", 10); 
+	ft_printf("%10d\n", 10);
 
 }

@@ -6,7 +6,7 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:22:44 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/16 18:45:33 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/17 20:17:54 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_init_flags(t_flag *flag)
 
 int		ft_printf(const char *format, ...)
 {
+	int			d;
 	va_list		args;
 	t_flag		*flag;
 	int			i;
@@ -39,11 +40,9 @@ int		ft_printf(const char *format, ...)
 		while (format[i] == '%')
 		{
 			ft_init_flags(flag);
-			if (!ft_isalpha(format[i++]) && format[i] != '\0')
-				ft_check_flags(args, format, *flag, i);
-			flag->type = format[i];
-			
-			ft_conv(args, *flag);
+			if (!ft_strchr(TYPE,format[i++]))
+				ft_check_flags(args, format, flag, i);
+			ft_conv(args, flag, format, i);
 			i++;
 		}
 		ft_putchar(format[i]);
@@ -52,3 +51,4 @@ int		ft_printf(const char *format, ...)
 	//i += 1;
 	return i;
 }
+//flag->type = format[i++];
