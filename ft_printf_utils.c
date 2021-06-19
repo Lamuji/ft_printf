@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:06:54 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/17 19:52:43 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/18 23:42:00 by ramzi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_isalpha(int c)
 
 int	ft_isdigit(int c)
 {
-	if (c >= 49 && c <= 57)
+	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }

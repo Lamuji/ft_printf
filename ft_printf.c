@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:22:44 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/17 20:17:54 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/19 01:30:20 by ramzi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,20 @@ int		ft_printf(const char *format, ...)
 	int			i;
 
 	i = 0;
+	va_start(args, format);
 	flag = malloc(sizeof(t_flag) * 1);
 	if (!flag)
 		return -1;
-	va_start(args, format);
 	while (format[i] != '\0')
 	{
-		while (format[i] == '%')
+		if (format[i] == '%')
 		{
 			ft_init_flags(flag);
-			if (!ft_strchr(TYPE,format[i++]))
-				ft_check_flags(args, format, flag, i);
+			if (!(ft_strchr(TYPE,format[i++])))
+				ft_check_flags(args, format, flag, i++);
 			ft_conv(args, flag, format, i);
 			i++;
 		}
-		ft_putchar(format[i]);
 		i++;
 	}
 	//i += 1;

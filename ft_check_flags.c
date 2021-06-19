@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_flags.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:06:46 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/17 21:20:59 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/06/19 01:01:20 by ramzi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void		ft_check_flags(va_list args, const char * format, t_flag *flag, int i)
 		flag.minus = 1;
 	else if (format[i] == '.')
 		flag.prec = 0;*/
-	if (ft_isdigit(format[i]) == 1)
+	if (format[i] >= '1' && format[i] <= '9')
 		flag->width = 1;
 }
