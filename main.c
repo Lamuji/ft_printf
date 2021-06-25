@@ -3,7 +3,6 @@
 
 int main()
 {
-	printf("12%d\n", 31); 
-	ft_printf("%d\n", 32);
-
+	printf("%d\n", 10); 
+	ft_printf("%d\n", 10);
 }

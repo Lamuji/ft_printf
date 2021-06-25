@@ -6,7 +6,7 @@
 /*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 18:21:59 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/19 01:28:06 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/06/25 17:05:25 by ramzi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void		print_d_i(va_list args, t_flag *flag , const char *format, int i)
 	int 	n;
 	int		j;
 	int		count;
-	int		p;
+	char *		p;
 
 	
 	j = 0;
 	count = 0;
 	n = va_arg(args, int);
 	width = malloc(sizeof(char *) * 1);
-	if (flag->width)
+	if (flag->width == 1)
 	{
 		while (ft_isdigit(format[i]))
 		{
@@ -35,11 +35,11 @@ void		print_d_i(va_list args, t_flag *flag , const char *format, int i)
 			i++;
 			j++;
 		}
-		p = ft_strlen(width);
-		space = ft_atoi(width) - p;
+		p = ft_itoa(n);
+		space = ft_atoi(width) - ft_strlen(p);
 		while(space > count)
 		{
-			write(1, " ", 1);
+			ft_putchar(' ');
 			count++;
 		}
 	}

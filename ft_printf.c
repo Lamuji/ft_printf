@@ -6,7 +6,7 @@
 /*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:22:44 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/19 01:30:20 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/06/25 17:11:39 by ramzi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int		ft_printf(const char *format, ...)
 	int			i;
 
 	i = 0;
-	va_start(args, format);
 	flag = malloc(sizeof(t_flag) * 1);
+	va_start(args, format);
 	if (!flag)
 		return -1;
 	while (format[i] != '\0')
@@ -41,10 +41,13 @@ int		ft_printf(const char *format, ...)
 		{
 			ft_init_flags(flag);
 			if (!(ft_strchr(TYPE,format[i++])))
-				ft_check_flags(args, format, flag, i++);
-			ft_conv(args, flag, format, i);
+				ft_check_flags(args, format, flag, i);
+			ft_conv(args, flag, format, i++);
+			while (!(ft_strchr(TYPE,format[i])))
+				i++;
 			i++;
 		}
+		ft_putchar(format[i]);
 		i++;
 	}
 	//i += 1;
