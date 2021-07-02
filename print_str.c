@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 21:16:12 by ramzi             #+#    #+#             */
-/*   Updated: 2021/06/29 22:04:29 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/07/02 13:36:00 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void    print_str(va_list args, t_flag * flag, const char * format, int type)
         {
             while (space > count)
             {
-               ft_putchar(' ');
-              count++;
+            	ft_putchar(' ');
+				count++;
             }
         }
         else

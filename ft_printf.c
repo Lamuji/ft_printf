@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:22:44 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/07/01 23:37:44 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/07/02 16:05:54 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *		handle_percent
+//char *		handle_percent
 
 
 
@@ -44,14 +44,12 @@ int		ft_printf(const char *format, ...)
 		{
 			ft_init_flags(flag);
 			if (!(ft_strchr(TYPE,format[++i])))
-			{
-				ft_check_flags(args, format, flag, i);
-			}
-			ft_conv(args, flag, format, i++);
+				ft_check_flags(format, flag, i);
+			ft_conv(args, flag, format, i);
+			//printf("///%c///", format[i]);
 			while (!(ft_strchr(TYPE,format[i])))
 				i++;
 			i++;
-			
 		}
 		ft_putchar(format[i]);
 		i++;

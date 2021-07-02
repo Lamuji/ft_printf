@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:06:54 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/07/01 19:34:47 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/07/02 20:01:04 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,71 @@ void	ft_putstr(char *str)
 	}
 }
 
-int     ft_putnbr_base(unsigned long nbr, char *base)
-{
-    unsigned long len_base;
+// int     ft_putnbr_base(unsigned long nbr, char *base)
+// {
+//     unsigned long len_base;
 
-    len_base = ft_strlen(base);
-	if (nbr < 0)
-		nbr = nbr * -1;
-	if (nbr == 0)
-		ft_putchar('0');
-	if (nbr >= len_base)
+//     len_base = ft_strlen(base);
+// 	if (nbr < 0)
+// 		nbr = nbr * -1;
+// 	if (nbr == 0)
+// 		ft_putchar('0');
+// 	if (nbr >= len_base)
+// 	{
+// 		ft_putnbr_base(nbr / len_base, base);
+// 		ft_putchar(base[nbr % len_base]);
+// 	}
+// 	else if (nbr <= len_base)
+// 	ft_putchar(base[nbr]);
+// 	return(nbr);
+//}
+
+char	*ft_rev(char *dest, int i)
+{
+	char	*str;
+	int		j;
+	j = 0;
+	str = ft_calloc(sizeof(str), i);
+	i--;
+	while (i >= 0)
 	{
-		ft_putnbr_base(nbr / len_base, base);
-		ft_putchar(base[nbr % len_base]);
+		str[j] = dest[i];
+		i--;
+		j++;
 	}
-	else if (nbr <= len_base)
-	ft_putchar(base[nbr]);
-	return(nbr);
+	str[j] = '\0';
+	return (str);
 }
+
+char	*ft_itoa_base(unsigned long long int nbr, char *base)
+{
+	char	*dest;
+	char	*str;
+	int		i;
+	int		len;
+	int		remain;
+
+	i = 0;
+	remain = 0;
+	len = ft_strlen(base);
+	dest = ft_calloc(sizeof(dest), 20);
+	if (!dest)
+		return (NULL);
+	while (nbr > 0)
+	{
+		remain = nbr % len;
+		if (remain < 10)
+			dest[i] = remain + '0';
+		else
+			dest[i] = 'a' + (remain - 10);
+		nbr = nbr / len;
+		i++;
+	}
+	str = ft_rev(dest, i);
+	free(dest);
+	return (str);
+}
+
 
 int	ft_isalpha(int c)
 {

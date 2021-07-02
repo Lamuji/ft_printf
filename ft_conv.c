@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_conv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 18:20:17 by ramzi             #+#    #+#             */
-/*   Updated: 2021/07/01 20:57:42 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/07/02 18:48:49 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void		ft_conv(va_list args, t_flag *flag, const char * format, int i)
 {
     int type;
-    char c;
 
 	type = i;
 	//printf("///%c///", format[i]);
@@ -36,4 +35,3 @@ void		ft_conv(va_list args, t_flag *flag, const char * format, int i)
 	else if (format[i] == 's')
 		print_str(args, flag, format, type);
 }
-

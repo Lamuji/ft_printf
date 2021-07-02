@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 15:58:08 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/07/01 19:28:22 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/07/02 20:14:39 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_putstr(char *str);
 int     ft_putnbr_base(unsigned long nbr, char *base);
 void	ft_putunbr_fd(long int n, int fd);
 int		ft_isdigit(int c);
-void	ft_check_flags(va_list args, const char * format, t_flag *flag, int i);
+void	ft_check_flags(const char * format, t_flag *flag, int i);
 int		ft_atoi(const char *str);
 char	*ft_strchr(const char *str, int c);
 int     ft_compte(int i);
@@ -52,6 +52,17 @@ void    print_Xx(va_list args, t_flag *flag, const char * format, int type);
 void	print_d_i(va_list args, t_flag *flag, const char * format, int type);
 void	print_char(va_list args, t_flag *flag, const char * format, int type);
 void    print_str(va_list args, t_flag *flag, const char * format, int type);
-void	width(int n, const char * format, int type);
-
+void	width_d(int n, const char * format, int type);
+void 	width_u(int n, const char * format, int type);
+void	width_c(const char * format, int type);
+void	width_Xx(int n, const char * format, int type);
+void	fill_zero_d(int n, const char * format, int type);
+void	fill_zero_u(int n, const char * format, int type);
+void	fill_zero_Xx(int n, const char * format, int type);
+void	fill_zero_c(const char * format, int type);
+void	minus_d(int n, const char * format, int type);
+void	minus_u(int n, const char * format, int type);
+void	minus_Xx(int n, const char * format, int type);
+void	minus_c(const char * format, int type);
+char	*ft_itoa_base(unsigned long long int nbr, char *base);
 # endif
