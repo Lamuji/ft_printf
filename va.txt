@@ -18,3 +18,7 @@ Elle doit toujours être appelée après un appel à la macrofonction va_start()
 
 
 //0000000050 : affiche nb de 0 moins taille du d
+
+
+
+1/juillet : probleme d'affichage sur le printf.c quand il y a de la largeur 

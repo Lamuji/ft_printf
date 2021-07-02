@@ -6,18 +6,22 @@
 /*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:22:44 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/25 17:11:39 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/07/01 23:37:44 by ramzi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char *		handle_percent
+
+
 
 void	ft_init_flags(t_flag *flag)
 {
 	flag->minus = 0;
 	flag->zero = 0;
 	flag->width = 0;
-	flag->prec = -1;
+	flag->prec = 0;
 	flag->type = 0;
 	flag->nbr_base = 10;
 	flag->sign = 1;
@@ -25,7 +29,6 @@ void	ft_init_flags(t_flag *flag)
 
 int		ft_printf(const char *format, ...)
 {
-	int			d;
 	va_list		args;
 	t_flag		*flag;
 	int			i;
@@ -35,22 +38,24 @@ int		ft_printf(const char *format, ...)
 	va_start(args, format);
 	if (!flag)
 		return -1;
-	while (format[i] != '\0')
+	while (format[i] != '\0' )
 	{
 		if (format[i] == '%')
 		{
 			ft_init_flags(flag);
-			if (!(ft_strchr(TYPE,format[i++])))
+			if (!(ft_strchr(TYPE,format[++i])))
+			{
 				ft_check_flags(args, format, flag, i);
+			}
 			ft_conv(args, flag, format, i++);
 			while (!(ft_strchr(TYPE,format[i])))
 				i++;
 			i++;
+			
 		}
 		ft_putchar(format[i]);
 		i++;
 	}
-	//i += 1;
+	va_end(args);
 	return i;
 }
-//flag->type = format[i++];

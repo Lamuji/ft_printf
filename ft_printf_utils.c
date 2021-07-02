@@ -6,7 +6,7 @@
 /*   By: ramzi <ramzi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:06:54 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/06/18 23:42:00 by ramzi            ###   ########.fr       */
+/*   Updated: 2021/07/01 19:34:47 by ramzi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,4 +245,31 @@ char	*ft_itoa(int n)
 		*s = '-';
 	s[size] = '\0';
 	return (s);
+}
+
+void	ft_putnbr(int n)
+{
+	unsigned int	nbr;
+
+	if (n < 0)
+	{
+		ft_putchar('-');
+		nbr = (n * -1);
+	}
+	else
+		nbr = n;
+	if (nbr >= 10)
+	{
+		ft_putnbr(nbr / 10);
+		ft_putchar((nbr % 10) + 48);
+	}
+	else
+		ft_putchar(nbr + 48);
+}
+
+int	ft_isascii(int c)
+{
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
