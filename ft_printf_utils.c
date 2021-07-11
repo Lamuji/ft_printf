@@ -6,16 +6,15 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:06:54 by rfkaier           #+#    #+#             */
-/*   Updated: 2021/07/02 20:01:04 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/07/11 18:45:04 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
-void	ft_putchar(char c)
+void	ft_putchar(char c, t_flag *flag)
 {
-	write(1, &c, 1);
+	flag->count += write(1, &c, 1);
 }
 
 size_t		ft_strlen(const char *str)
@@ -28,27 +27,7 @@ size_t		ft_strlen(const char *str)
 	return i;
 }
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	unsigned int	nbr;
-
-	if (n < 0)
-	{
-		ft_putchar('-');
-		nbr = (n * -1);
-	}
-	else
-		nbr = n;
-	if (nbr >= 10)
-	{
-		ft_putnbr_fd(nbr / 10, fd);
-		ft_putchar((nbr % 10) + 48);
-	}
-	else
-		ft_putchar(nbr + 48);
-}
-
-void	ft_putunbr_fd(long int n, int fd)
+void	ft_putunbr_fd(long int n, int fd, t_flag *flag)
 {
 	unsigned long int nbr;
 
@@ -61,43 +40,43 @@ void	ft_putunbr_fd(long int n, int fd)
 		nbr = n;
 	if (nbr >= 10)
 	{
-		ft_putunbr_fd(nbr / 10, fd);
-		ft_putchar((nbr % 10) + 48);
+		ft_putunbr_fd(nbr / 10, fd, flag);
+		ft_putchar((nbr % 10) + 48, flag);
 	}
 	else
-		ft_putchar(nbr + 48);
+		ft_putchar(nbr + 48, flag);
 }
 
-void	ft_putstr(char *str)
+void	ft_putstr(char *str, t_flag *flag)
 {
 	int i;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		ft_putchar(str[i]);
+		ft_putchar(str[i], flag);
 		i++;
 	}
 }
 
-// int     ft_putnbr_base(unsigned long nbr, char *base)
-// {
-//     unsigned long len_base;
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	char	*tab;
+	size_t	i;
+	size_t	max;
 
-//     len_base = ft_strlen(base);
-// 	if (nbr < 0)
-// 		nbr = nbr * -1;
-// 	if (nbr == 0)
-// 		ft_putchar('0');
-// 	if (nbr >= len_base)
-// 	{
-// 		ft_putnbr_base(nbr / len_base, base);
-// 		ft_putchar(base[nbr % len_base]);
-// 	}
-// 	else if (nbr <= len_base)
-// 	ft_putchar(base[nbr]);
-// 	return(nbr);
-//}
+	max = nmemb * size;
+	tab = malloc(max);
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (max--)
+	{
+		tab[i] = 0;
+		i++;
+	}
+	return ((void *)tab);
+}
 
 char	*ft_rev(char *dest, int i)
 {
@@ -145,6 +124,34 @@ char	*ft_itoa_base(unsigned long long int nbr, char *base)
 	return (str);
 }
 
+char	*ft_itoa_base_maj(unsigned long long int nbr, char *base)
+{
+	char	*dest;
+	char	*str;
+	int		i;
+	int		len;
+	int		remain;
+
+	i = 0;
+	remain = 0;
+	len = ft_strlen(base);
+	dest = ft_calloc(sizeof(dest), 20);
+	if (!dest)
+		return (NULL);
+	while (nbr > 0)
+	{
+		remain = nbr % len;
+		if (remain < 10)
+			dest[i] = remain + '0';
+		else
+			dest[i] = 'A' + (remain - 10);
+		nbr = nbr / len;
+		i++;
+	}
+	str = ft_rev(dest, i);
+	free(dest);
+	return (str);
+}
 
 int	ft_isalpha(int c)
 {
@@ -294,24 +301,24 @@ char	*ft_itoa(int n)
 	return (s);
 }
 
-void	ft_putnbr(int n)
+void	ft_putnbr(int n, t_flag *flag)
 {
 	unsigned int	nbr;
 
 	if (n < 0)
 	{
-		ft_putchar('-');
+		ft_putchar('-', flag);
 		nbr = (n * -1);
 	}
 	else
 		nbr = n;
 	if (nbr >= 10)
 	{
-		ft_putnbr(nbr / 10);
-		ft_putchar((nbr % 10) + 48);
+		ft_putnbr(nbr / 10, flag);
+		ft_putchar((nbr % 10) + 48, flag);
 	}
 	else
-		ft_putchar(nbr + 48);
+		ft_putchar(nbr + 48, flag);
 }
 
 int	ft_isascii(int c)
@@ -319,4 +326,63 @@ int	ft_isascii(int c)
 	if (c >= 0 && c <= 127)
 		return (1);
 	return (0);
+}
+
+char	*ft_strcat(char *dest, char *src)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	j = 0;
+	while (src[j] != '\0')
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
+}
+
+int		ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] == s2[i])
+			i++;
+		if (s1[i] < s2[i] || s1[i] > s2[i])
+			return (s1[i] - s2[i]);
+	}
+	return (0);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t		i;
+	size_t		len_s2;
+	char		*dest;
+
+	if (!s1 || !s2)
+		return (NULL);
+	i = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	dest = malloc(sizeof(char) * (i + len_s2 + 1));
+	if (!dest)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		dest[i] = s1[i];
+	len_s2 = -1;
+	while (s2[++len_s2])
+	{
+		dest[i] = s2[len_s2];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

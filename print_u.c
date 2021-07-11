@@ -6,14 +6,13 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 18:31:55 by ramzi             #+#    #+#             */
-/*   Updated: 2021/07/02 19:22:10 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/07/11 18:43:42 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-void 	width_u(int n, const char * format, int type)
+void 	width_u(t_flag *flag, int n, const char * format, int type)
 {
 	int     count;
     int     space;
@@ -23,7 +22,7 @@ void 	width_u(int n, const char * format, int type)
 
     j = 0;
     count = 0;
-    width = malloc(sizeof(char *) * 1);
+    width = NULL;
 	while (ft_isdigit(format[type]))
 	{
 		width[j] = format[type];
@@ -36,11 +35,10 @@ void 	width_u(int n, const char * format, int type)
 		p = ft_itoa(n);
 	space = ft_atoi(width) - ft_strlen(p);
 	while(space > count++)
-		ft_putchar(' ');
-    free(width);
+		ft_putchar(' ', flag);
 }
 
-void	fill_zero_u(int n, const char * format, int type)
+void	fill_zero_u(t_flag *flag, int n, const char * format, int type)
 {
 	int     count;
     int     space;
@@ -50,7 +48,7 @@ void	fill_zero_u(int n, const char * format, int type)
 
     j = 0;
     count = 0;
-    width = malloc(sizeof(char *) * 1);
+    width = NULL;
 	while (ft_isdigit(format[type]))
 	{
 		width[j] = format[type];
@@ -63,11 +61,10 @@ void	fill_zero_u(int n, const char * format, int type)
 		p = ft_itoa(n);
 	space = ft_atoi(width) - ft_strlen(p);
 	while(space > count++)
-		ft_putchar('0');
-    free(width);
+		ft_putchar('0', flag);
 }
 
-void	minus_u(int n, const char * format, int type)
+void	minus_u(t_flag *flag, int n, const char * format, int type)
 {
 	int     count;
     int     space;
@@ -77,7 +74,7 @@ void	minus_u(int n, const char * format, int type)
 
     j = 0;
     count = 0;
-    width = malloc(sizeof(char *) * 1);
+    width = NULL;
 	while (ft_isdigit(format[type]))
 	{
 		width[j] = format[type];
@@ -90,8 +87,7 @@ void	minus_u(int n, const char * format, int type)
 		p = ft_itoa(n);
 	space = ft_atoi(width) - ft_strlen(p);
 	while(space > count++)
-		ft_putchar(' ');
-    free(width);
+		ft_putchar(' ', flag);
 }
 
 void    print_u(va_list args, t_flag *flag, const char *format, int type)
@@ -100,10 +96,10 @@ void    print_u(va_list args, t_flag *flag, const char *format, int type)
 
     n = va_arg(args, unsigned int);
 	if (flag->width == 1)
-		width_u(n, format, type);
+		width_u(flag, n, format, type);
 	if (flag->zero == 1)
-		fill_zero_u(n, format, type);
-    ft_putunbr_fd(n, 1);
+		fill_zero_u(flag, n, format, type);
+    ft_putunbr_fd(n, 1, flag);
 	if (flag->minus == 1)
-		minus_u(n, format, type + 1);
+		minus_u(flag, n, format, type + 1);
 }

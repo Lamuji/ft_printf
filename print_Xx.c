@@ -6,15 +6,13 @@
 /*   By: rfkaier <rfkaier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:24:24 by ramzi             #+#    #+#             */
-/*   Updated: 2021/07/02 20:14:50 by rfkaier          ###   ########.fr       */
+/*   Updated: 2021/07/11 19:25:48 by rfkaier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-
-void	width_Xx(int n, const char * format, int type)
+void	width_Xx(t_flag *flag, int n, const char * format, int type)
 {
 	int     j;
     char *  width;
@@ -24,7 +22,7 @@ void	width_Xx(int n, const char * format, int type)
 
     j = 0;
     count = 0;
-    width = malloc(sizeof(char *) * 1);
+    width = NULL;
 	while (ft_isdigit(format[type]))
 	{
 		width[j] = format[type];
@@ -34,11 +32,10 @@ void	width_Xx(int n, const char * format, int type)
 	p = ft_itoa(n);
 	space = ft_atoi(width) - ft_strlen(p);
 	while(space > count++)
-		ft_putchar(' ');
-    free(width);
+		ft_putchar(' ', flag);
 }
 
-void	fill_zero_Xx(int n, const char * format, int type)
+void	fill_zero_Xx(t_flag *flag, int n, const char * format, int type)
 {
 	int     j;
     char *  width;
@@ -48,7 +45,7 @@ void	fill_zero_Xx(int n, const char * format, int type)
 
     j = 0;
     count = 0;
-    width = malloc(sizeof(char *) * 1);
+    width = NULL;
 	while (ft_isdigit(format[type]))
 	{
 		width[j] = format[type];
@@ -58,11 +55,10 @@ void	fill_zero_Xx(int n, const char * format, int type)
 	p = ft_itoa(n);
 	space = ft_atoi(width) - ft_strlen(p);
 	while(space > count++)
-		ft_putchar('0');
-    free(width);
+		ft_putchar('0', flag);
 }
 
-void	minus_Xx(int n, const char * format, int type)
+void	minus_Xx(t_flag *flag, int n, const char * format, int type)
 {
 	int     j;
     char *  width;
@@ -72,7 +68,7 @@ void	minus_Xx(int n, const char * format, int type)
 
     j = 0;
     count = 0;
-    width = malloc(sizeof(char *) * 1);
+    width = NULL;
 	while (ft_isdigit(format[type]))
 	{
 		width[j] = format[type];
@@ -82,26 +78,29 @@ void	minus_Xx(int n, const char * format, int type)
 	p = ft_itoa(n);
 	space = ft_atoi(width) - ft_strlen(p);
 	while(space > count++)
-		ft_putchar(' ');
-    free(width);
+		ft_putchar(' ', flag);
 }
 
 void    print_Xx(va_list args, t_flag *flag, const char * format, int type)
 {
     unsigned long long	n;
-	char			*str;
+	char				*str;
+	int					letter;
 	
+	letter = type;
 	str = NULL;
 	n = va_arg(args, unsigned long);
 	if (flag->width == 1)
-		width_Xx(n, format, type);
+		width_Xx(flag , n, format, type);
 	if (flag->zero == 1)
-		fill_zero_Xx(n, format, type);
-    if (format[type] == 'X')
-		str = ft_itoa_base(n, "0123456789ABCDEF");
-    else
-        str = ft_itoa_base(n, "0123456789abcdef");
-	ft_putstr(str);
+		fill_zero_Xx(flag, n, format, type);
+	while (!(ft_isalpha(format[letter])))
+		letter++;
+	if (format[letter] == 'x')
+		str = ft_itoa_base(n, "0123456789abcdef");
+	else if (format[letter] == 'X')
+		str = ft_itoa_base_maj(n, "0123456789ABCDEF");
+	ft_putstr(str, flag);
 	if (flag->minus == 1)
-		minus_Xx(n, format, type + 1);
+		minus_Xx(flag, n, format, type + 1);
 }

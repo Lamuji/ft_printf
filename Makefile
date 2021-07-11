@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 AR = ar
 ARFLAGS = rc
-RM = rm
+RM = rm -f
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
@@ -38,7 +38,6 @@ LIBFT = $(addprefix libft/,) \
 	   ft_itoa.c \
 	   ft_putchar_fd.c \
 	   ft_putstr_fd.c \
-	   ft_putendl_fd.c \
 	   ft_putnbr_fd.c \
 	   ft_lstnew.c \
 		ft_lstadd_front.c \
@@ -59,7 +58,8 @@ SRCS =	ft_conv.c \
 		print_str.c \
 		print_u.c \
 		print_Xx.c \
-		main.c \
+		print_p.c \
+		print_str.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -69,7 +69,7 @@ $(NAME): $(OBJS)
 	make -C libft/
 	make bonus -C libft/
 	mv libft/libft.a ./libftprintf.a
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS) 
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 prog: libftprintf.a
 	$(CC) -o prog main.c $(NAME)
